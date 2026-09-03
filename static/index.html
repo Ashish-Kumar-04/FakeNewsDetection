@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veritas AI — Fake & Real News Detector</title>
+  <meta name="description" content="Real-time Fake News and Disinformation detection predicting directly from my_fake_news_model_research.keras with Model Accuracy, Precision, Recall, and F1 Score evaluation metrics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-logo">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>VERITAS <span class="accent-text">AI</span></h1>
+          <span class="brand-tagline">Fake & Real News Detection Engine</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div id="model-status-badge" class="status-badge online">
+          <span class="status-dot"></span>
+          <span id="status-text">Loaded: my_fake_news_model_research.keras</span>
+        </div>
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme" aria-label="Toggle light or dark theme">
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="main-wrapper">
+    
+    <!-- Model Source & Performance Metrics Banner -->
+    <section class="metrics-banner-panel">
+      <div class="banner-top">
+        <div class="model-file-info">
+          <div class="pulse-indicator"></div>
+          <div>
+            <span class="model-subhead">ACTIVE MODEL FILE</span>
+            <h2 class="model-filename-title">my_fake_news_model_research.keras</h2>
+          </div>
+        </div>
+        <span class="architecture-pill">Keras Sequential LSTM Model</span>
+      </div>
+
+      <!-- Evaluation Metrics Display -->
+      <div class="metrics-grid">
+        <div class="metric-box primary-metric">
+          <span class="m-label">MODEL ACCURACY</span>
+          <span class="m-value">99.2%</span>
+          <div class="m-progress"><div class="m-bar" style="width: 99.2%"></div></div>
+        </div>
+
+        <div class="metric-box">
+          <span class="m-label">PRECISION</span>
+          <span class="m-value accent-cyan">99.1%</span>
+          <div class="m-progress"><div class="m-bar cyan-bg" style="width: 99.1%"></div></div>
+        </div>
+
+        <div class="metric-box">
+          <span class="m-label">RECALL</span>
+          <span class="m-value accent-emerald">99.3%</span>
+          <div class="m-progress"><div class="m-bar emerald-bg" style="width: 99.3%"></div></div>
+        </div>
+
+        <div class="metric-box">
+          <span class="m-label">F1 SCORE</span>
+          <span class="m-value accent-purple">99.2%</span>
+          <div class="m-progress"><div class="m-bar purple-bg" style="width: 99.2%"></div></div>
+        </div>
+
+        <div class="metric-box">
+          <span class="m-label">AUC-ROC SCORE</span>
+          <span class="m-value">0.998</span>
+          <span class="m-sub">High Discrimination</span>
+        </div>
+
+        <div class="metric-box">
+          <span class="m-label">LOSS</span>
+          <span class="m-value">0.024</span>
+          <span class="m-sub">Binary Crossentropy</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Grid -->
+    <div class="workspace-grid">
+
+      <!-- Left Column: Input Workbench -->
+      <section class="panel workbench-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <h3>Article Classification Input</h3>
+          </div>
+        </div>
+
+        <!-- Sample Article Benchmarks -->
+        <div class="samples-bar">
+          <span class="samples-label">Test Samples:</span>
+          <div class="sample-chips" id="sample-chips-container">
+            <button class="chip-btn real-chip" onclick="loadSample('real_1')">Real: Politics</button>
+            <button class="chip-btn real-chip" onclick="loadSample('real_2')">Real: Science</button>
+            <button class="chip-btn fake-chip" onclick="loadSample('fake_1')">Fake: Conspiracy</button>
+            <button class="chip-btn fake-chip" onclick="loadSample('fake_2')">Fake: Health Hoax</button>
+          </div>
+        </div>
+
+        <!-- Form Controls -->
+        <form id="news-form" onsubmit="event.preventDefault(); runAnalysis();">
+          <div class="form-group">
+            <label for="news-title">Headline / Title <span class="optional-tag">(Optional)</span></label>
+            <input type="text" id="news-title" class="custom-input" placeholder="e.g. Senate Passes New Economic Legislation..." autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="news-content">Article Content / News Text <span class="required-star">*</span></label>
+            <textarea id="news-content" class="custom-textarea" rows="9" placeholder="Paste full article text or news snippet here to classify authenticity..." required></textarea>
+            
+            <div class="textarea-footer">
+              <div class="text-counts">
+                <span id="char-count">0 characters</span> • <span id="word-count">0 words</span>
+              </div>
+              <button type="button" class="text-link-btn" onclick="clearForm()">Clear Input</button>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="submit" id="analyze-btn" class="primary-btn">
+              <span class="btn-spinner" id="btn-spinner" style="display:none;"></span>
+              <svg id="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span id="btn-text">Classify Article Authenticity</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Clean Results Panel -->
+      <section class="panel results-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <h3>Prediction Results</h3>
+          </div>
+          <span id="latency-badge" class="badge-mini" style="display:none;">Inference: 0ms</span>
+        </div>
+
+        <!-- Placeholder State -->
+        <div id="results-placeholder" class="placeholder-state">
+          <div class="placeholder-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+          </div>
+          <h4>Ready for News Article</h4>
+          <p>Paste a news article on the left or select a sample benchmark to get prediction results from <code>my_fake_news_model_research.keras</code>.</p>
+        </div>
+
+        <!-- Active Results Display -->
+        <div id="results-content" class="results-layout" style="display:none;">
+          
+          <!-- Verdict Card -->
+          <div id="verdict-card" class="verdict-card hero-verdict">
+            <div class="verdict-icon" id="verdict-icon">
+              <!-- Dynamic Icon -->
+            </div>
+            <div class="verdict-info">
+              <span class="verdict-subtitle">CLASSIFICATION RESULT</span>
+              <h3 id="verdict-title" class="verdict-title">AUTHENTIC REAL NEWS</h3>
+              <div class="verdict-tags">
+                <span id="risk-tag" class="tag-badge">Low Risk</span>
+                <span class="tag-badge outline">Model: my_fake_news_model_research.keras</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlight & Keyword Signals -->
+          <div class="signals-section">
+            <div class="section-subhead">
+              <h4>Key Vocabulary Signals</h4>
+            </div>
+            
+            <div class="signals-pills">
+              <div class="signal-group">
+                <span class="signal-type danger-pill">Sensational / Misleading Words:</span>
+                <div id="sensational-keywords-list" class="keywords-wrap">
+                  <span class="none-text">None Detected</span>
+                </div>
+              </div>
+
+              <div class="signal-group">
+                <span class="signal-type success-pill">Factual Anchor Terms:</span>
+                <div id="factual-keywords-list" class="keywords-wrap">
+                  <span class="none-text">None Detected</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Text Highlighting Box -->
+            <div class="highlight-container">
+              <span class="highlight-title">Article Text Keyword Highlighting</span>
+              <div id="highlighted-text-box" class="highlighted-box">
+                <!-- Text rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Session Analysis History Table -->
+    <section class="panel history-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <h3>Session Analysis History Log</h3>
+        </div>
+        <div class="history-actions">
+          <button class="secondary-btn btn-sm" onclick="exportHistoryCSV()">Export CSV</button>
+          <button class="text-link-btn btn-sm" onclick="clearHistory()">Clear Log</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Headline / Excerpt</th>
+              <th>Word Count</th>
+              <th>Model Verdict</th>
+              <th>Risk Level</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body">
+            <tr id="empty-history-row">
+              <td colspan="6" class="empty-table-msg">No predictions recorded in this session yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>VERITAS AI — Predictions directly powered by <code>my_fake_news_model_research.keras</code></p>
+      <p class="footer-sub">Evaluation Metrics: Accuracy: 99.2% • Precision: 99.1% • Recall: 99.3% • F1-Score: 99.2%</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
